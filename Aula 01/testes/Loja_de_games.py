@@ -1,4 +1,4 @@
-#. Definição dos dados (Uso de listas/dicionarios)
+#1 Definição dos dados (Uso de listas/dicionarios)
 jogos = ["Minecraft", "GTA V", "FIFA"]
 precos = [80, 120, 90]
 carrinho = []
