@@ -1,5 +1,5 @@
 """
-URL configuration for tuxschool project.
+URL configuration for setup project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -16,9 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cadastro.views import lista_alunos
+
+#Diz para o urls onde encontrar a função
+from cliente.views import home, dados_clientes, formulario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lista_alunos, name='lista_alunos'),
+
+    #Vai chamar a função ola_mundo dentro do views do app cliente
+    #path('endereço/', metodo), 
+    
+    path('', home, name='/'),
+    path('clientes/', dados_clientes, name="clientes"),
+    path('formulario/', formulario, name="formulario"),
 ]

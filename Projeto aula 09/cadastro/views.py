@@ -13,4 +13,4 @@ def lista_alunos(request):
         'alunos': alunos
     }
     
-    return render(request, 'lista.html', context)
+    return render(request, 'alunos/lista.html', context)
