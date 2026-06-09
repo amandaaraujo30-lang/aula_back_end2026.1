@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Alunos</title>
-</head>
+{% extends "base.html" %}
+{% block content %}
 <body>
 
     <h2>Alunos Cadastrados</h2>
@@ -31,6 +27,4 @@
             {% endfor %}
         </tbody>
     </table>
-
-</body>
-</html>
+  {% endblock %}

@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+def home(request):
+    titulo = "Pagina Inicial"
+    return render(request, 'alunos/home.html', {'titulo': titulo})
+
 def lista_alunos(request):
     # Lista de dicionários com os dados dos alunos (simulando o banco de dados)
     alunos = [
