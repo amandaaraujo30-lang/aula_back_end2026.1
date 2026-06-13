@@ -4,27 +4,43 @@
 
     <h2>Alunos Cadastrados</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Curso</th>
-                <th>Turma</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for aluno in alunos %}
-            <tr>
-                <td>{{ aluno.nome }}</td>
-                <td>{{ aluno.curso }}</td>
-                <td>{{ aluno.turma }}</td>
-                <td>
-                    <button>Edição</button>
-                    <button>Excluir</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <table class="tabela-alunos">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Nasc.</th>
+            <th>Turma</th>
+            <th>Campus</th>
+            <th>Cursos</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for aluno in lista %}
+        <tr>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.email }}</td>
+            <td>{{ aluno.data_nascimento|date:"d/m/Y" }}</td>
+            <td>{{ aluno.turma.nome }} ({{ aluno.turma.get_periodo_display }})</td>
+            <td>{{ aluno.campus.nome }}</td>
+            <td>
+                {% for c in aluno.curso.all %}
+                    {{ c.nome }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    <span class="sem-curso">Nenhum</span>
+                {% endfor %}
+            </td>
+            <td>
+                <button class="botao-edicao">Edição</button>
+                <button class="botao-excluir">Excluir</button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align: center;">Nenhum aluno cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
   {% endblock %}

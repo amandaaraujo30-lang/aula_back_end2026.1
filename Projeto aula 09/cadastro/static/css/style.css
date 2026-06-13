@@ -163,3 +163,32 @@ td{
 tbody tr:last-child{
     border-bottom: none;
 }
+
+
+/* Estilização da Tabela de Alunos */
+.tabela-alunos {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.tabela-alunos thead tr {
+    background-color: #2ecc71; /* Aquele verde bonito */
+    color: white;
+}
+
+.tabela-alunos th, 
+.tabela-alunos td {
+    padding: 10px;
+}
+
+.tabela-alunos tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Deixar o "Nenhum" sutil */
+.sem-curso {
+    color: #999;
+    font-style: italic;
+}

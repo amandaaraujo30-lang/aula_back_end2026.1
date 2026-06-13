@@ -1,25 +1,43 @@
-from django.shortcuts import render #Ja vem por padrão
+from django.shortcuts import render 
 
-#Importar a classe (Ferramenta) HttpResponse
-from django.http import HttpResponse #Vai responder a solicitação do navegador
+#Conectar ao arquivo models. Importa a classe
+from .models import Cliente, Conta
 
-#Cria a função que reposnde a solicitação do navegador
+""" 
+Criar uma pagina onde ele consiga visualizar os clientes cadastrados em formato de tabela
 
-#Aula 08
-#Chamar arquivos HTML (Template)
+Vsualizar: 
+Nome, Idade, Data_Nascimento
+
+Dados devem vir de uma lista de dicionario
+"""
 def home(request):
     titulo = "Pagina Inicial"
     return render(request, 'clientes/home.html', {'titulo': titulo})
- 
+
 def dados_clientes(request):
-    titulo = "Nosos Clientes"
-    nossos_clientes = [
-        {'nome': 'Mario Silva de Carvalho', 'idade': '44 anos', 'nascimento': '17/08/1982'},
-        {'nome': 'Jose Alves', 'idade': '42 anos', 'nascimento': '17/08/1980'},
-        {'nome': 'Ana Maria Braga', 'idade': '35 anos', 'nascimento': '10/12/1988'},
-    ]
+    titulo = "Nossos Clientes" 
+    #Tras todos os dadsos do model Cliente
+    nossos_clientes = Cliente.objects.all() #Importa os dados do banco de dados
     return render(request, 'clientes/dados_clientes.html', {'titulo': titulo, 'dados_clientes':nossos_clientes})
- 
-def formulario(request):
-    titulo = "Nosos Clientes"
+
+def conta(request):
+    titulo = "Contas Pessoas Físicas"
+    nossas_contas = Conta.objects.all()
+    return render(request, 'clientes/dados_contas.html', {'titulo': titulo, 'contas':nossas_contas})
+
+
+
+
+
+
+
+
+def fomulario(request):
+    titulo = "Cadastro Clientes"
     return render(request, 'clientes/form.html', {'titulo':titulo})
+
+def contato(request):
+    titulo = "Contato"
+    contato = "email@python.com"
+    return render(request, 'clientes/contato.html', {'titulo': titulo, 'contato': contato})

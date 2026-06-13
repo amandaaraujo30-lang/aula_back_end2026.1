@@ -1,23 +1,21 @@
 {% extends "base.html" %}
- 
+
 {%  block content %}
-
-<h1>{{Titulo}}</h1>
-
-    <table border="1">
+<h1 class="titulo_clientes">{{ titulo }}</h1>
+    <table>
         <thead>
             <tr>
                 <th>Nome: </th>
-                <th>Idade: </th>
-                <th>Nascimento: </th>
+                <th>CPF: </th>
+                <th>Telefone: </th>
             </tr>
         </thead>
         <tbody>
             {% for cliente in dados_clientes %}
             <tr>
                 <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.idade }}</td>
-                <td>{{ cliente.nascimento }}</td>
+                <td>{{ cliente.cpf }}</td>
+                <td>{{ cliente.telefone }}</td>
             </tr>
             {% endfor %}
         </tbody>

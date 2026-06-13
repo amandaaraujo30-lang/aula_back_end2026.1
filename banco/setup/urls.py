@@ -16,17 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cliente.views import home, dados_clientes, fomulario, contato, conta
 
+#Importar as funções do arquivo viewa do nosso APP
+from banco.views import index, abrir_conta
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    #Vai chamar a função ola_mundo dentro do views do app cliente
-    #path('endereço/', metodo),
-
-    path('', home, name='/'), 
-    path('clientes/', dados_clientes, name="clientes"),
-    path('formulario/', fomulario, name="formulario"),
-    path('contato/', contato, name='contato'),
-    path('contas/', conta, name="contas" )
+    path('', index, name="inicio"),
+    path('abrir_conta', abrir_conta, name="abrir_conta")
 ]
