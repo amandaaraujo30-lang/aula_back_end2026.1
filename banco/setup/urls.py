@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path
 
 #Importar as funções do arquivo view do nosso APP
-from banco.views import index, abrir_conta, conta, depositar
+from banco.views import index, abrir_conta, conta, depositar, sacar
  
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="inicio"),
     path('abrir_conta', abrir_conta, name="abrir_conta"),
     path('conta/<int:conta_id>', conta, name='conta'),
-    path('depositar/', depositar, name='depositar')
+    path('conta/<int:conta_id>/depositar/', depositar, name='depositar'),
+    path('conta/<int:conta_id>/sacar/', sacar, name='sacar'),
 ]

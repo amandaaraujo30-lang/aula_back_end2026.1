@@ -60,7 +60,10 @@ def conta(request, conta_id):
 
     conta = get_object_or_404(Conta, id=conta_id)
 
-    return render (request, 'pages/conta.html', {'conta':conta})
+    #Pegar as movimentações(Seleciona os movimentos, ordena pela data, exibe somente os 5 ultimos)
+    movimentos = conta.movimento_set.all().order_by('-data')[:5]
+
+    return render (request, 'pages/conta.html', {'conta':conta, 'movimentos':movimentos})
 
 def depositar(request, conta_id):
     
@@ -68,7 +71,7 @@ def depositar(request, conta_id):
 
     if request.method == "POST":
         try:
-            valor = Decimal(request.POST.get('valor_form'))
+            valor = Decimal(request.POST.get('valor'))
             if valor > 0:
                 conta.depositar(valor)
 
@@ -82,3 +85,25 @@ def depositar(request, conta_id):
             messages.error(request, 'Valor invalido!')
 
     return render(request, 'pages/depositar.html', {'conta':conta})
+
+def sacar(request, conta_id):
+    conta = get_object_or_404(Conta, id=conta_id)
+    
+    if request.method == "POST":
+        try:
+            valor = Decimal(request.POST.get('valor'))
+            
+            # Valida se o valor é positivo e se a conta tem saldo suficiente
+            if valor > 0 and conta.saldo >= valor:
+                conta.sacar(valor)
+                conta.save()
+                
+                Movimento.objects.create(conta=conta, tipo='saque', valor=valor)
+                messages.success(request, f"Saque de R${valor:.2f} realizado com sucesso!")
+                return redirect('conta', conta_id=conta.id)
+            else:
+                messages.error(request, 'Valor inválido ou saldo insuficiente!')
+        except Exception:
+            messages.error(request, 'Valor inválido ou saldo insuficiente!')
+            
+    return render(request, 'pages/sacar.html', {'conta': conta})

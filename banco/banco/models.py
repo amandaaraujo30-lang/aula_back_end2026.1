@@ -17,7 +17,7 @@ class Conta(models.Model):
    
     def depositar(self, valor):
         self.saldo += valor
-        self.save() #Grava no banco de dados
+        self.save()
  
     def sacar(self, valor):
         if valor <= self.saldo:
