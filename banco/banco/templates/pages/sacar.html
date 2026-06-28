@@ -1,32 +1,26 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
 <section class="form-box">
-    
-    <div class="cartao-conta"> 
-        
-        <h2>Sacar</h2>
-        <p>Conta: {{ conta.numero }} </p>
-        <div class="bloco-saldo">
-            <span class="label-saldo">Saldo disponível:</span>
-            <span class="valor-saldo">R$ {{ conta.saldo }}</span> 
+    <h2>Sacar</h2>
+    <p>Conta:{{ conta.numero }} </p>
+    <p>Saldo Atual: R$ {{ conta.saldo }}</p>
+
+    <!-- GET -> Visiveis no enderço (url) -->
+    <!-- POST -> Não ficam aparentes na URL  -->
+    <form method="POST">
+        {% csrf_token %} <!-- Ferramenta de segurança do django para formularios -->
+
+        <div class="form-group">
+            <label>Valor: </label>
+            <input type="number" name="valor_form" step="0.01" min="0.01" max="{{ conta }}" required>
         </div>
 
-        <form method="POST" class="formulario-banco">
-            {% csrf_token %}
-
-            <div class="form-group">
-                 <label>Valor: </label>
-                <input type="number" step="0.01" name="valor" placeholder="Digite o valor do saque" required>
-            </div>
-
-           <div class="botoes-form">
+        <div class="botoes-form">
             <button type="submit" class="btn btn-success">Confirmar</button>
             <a href="{% url 'conta' conta.id %}" class="btn btn-secondary">Cancelar</a>
         </div>
-        </form>
+    </form>
 
-    </div>
 </section>
 {% endblock %}

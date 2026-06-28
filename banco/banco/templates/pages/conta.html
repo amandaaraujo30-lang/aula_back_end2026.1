@@ -14,7 +14,7 @@
     
     <div class="botoes">
         <a href="{% url 'depositar' conta.id %}" class="btn btn-success">Depositar</a>
-        <a href="{% url 'sacar' conta.id %}" class="btn btn-warning">Sacar</a>
+        <a href="{% url 'saque' conta.id %}" class="btn btn-warning">Sacar</a>
     </div>
 
     <div class="movimentos">
@@ -33,6 +33,5 @@
             <p>Nenhum movimento ainda.</p>
         {% endif %}
     </div>
-
 </section>
 {% endblock %}

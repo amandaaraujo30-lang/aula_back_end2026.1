@@ -17,14 +17,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-#Importar as funções do arquivo view do nosso APP
-from banco.views import index, abrir_conta, conta, depositar, sacar
- 
+#Importar as funções do arquivo viewa do nosso APP
+from banco.views import index, abrir_conta, conta, depositar, saque, logout, acessar_conta #criar_cookie, ler_cookie, login, home,
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="inicio"),
-    path('abrir_conta', abrir_conta, name="abrir_conta"),
-    path('conta/<int:conta_id>', conta, name='conta'),
+    path('abrir_conta/', abrir_conta, name="abrir_conta"),
+
+    #Configurando o endereço para receber o id e informar a funçõa
+    path('conta/<int:conta_id>/', conta, name='conta'),
     path('conta/<int:conta_id>/depositar/', depositar, name='depositar'),
-    path('conta/<int:conta_id>/sacar/', sacar, name='sacar'),
+    path('conta/<int:conta_id>/sacar/', saque, name='saque'),
+    path('acessar_conta/', acessar_conta, name='acessar_conta'),
+    path('logout/', logout, name='logout'),
+
+    #Cookies
+    #path('criar_cookie/', criar_cookie),
+    #path('ler_cookie/', ler_cookie),
+
+    #Cria a sessão
+    #path('login/', login, name='login'),
+    #path('home/', home, name='home'),
+    
+
+    
 ]
