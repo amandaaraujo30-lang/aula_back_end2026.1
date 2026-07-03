@@ -1,0 +1,373 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E RESET
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f5f9; /* Fundo cinza claro e moderno */
+    color: #334155; /* Texto grafite suave para não cansar os olhos */
+    line-height: 1.6;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2563eb;
+}
+
+/* ==========================================================================
+   2. ESTRUTURA E LAYOUT (CONTAINERS)
+   ========================================================================== */
+header {
+    background: linear-gradient(135deg, #1e293b, #0f172a); /* Degradê escuro chique */
+    color: #ffffff;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+nav {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #f1f5f9;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Container Principal */
+main, .container {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   3. CARTÕES DE POSTS
+   ========================================================================== */
+.post {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px; /* Cantos arredondados modernos */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+    transform: translateY(-2px); /* Efeito flutuante ao passar o mouse */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+.artigo-blog {
+    margin-bottom: 2.5rem;
+}
+
+.post h2 {
+    font-size: 1.8rem;
+    color: #0f172a;
+    margin: 0.8rem 0;
+    line-height: 1.3;
+}
+
+.post-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.post-header-meta strong {
+    color: #475569;
+}
+
+.post-conteudo {
+    font-size: 1.05rem;
+    color: #334155;
+    margin-bottom: 1.5rem;
+    white-space: pre-line; /* Respeita as quebras de linha do texto */
+}
+
+.linha-divisoria {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 1.5rem 0;
+}
+
+/* ==========================================================================
+   4. SEÇÃO DE COMENTÁRIOS
+   ========================================================================== */
+.comentarios-secao {
+    margin-top: 1.5rem;
+}
+
+.comentarios-secao h3 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Balão de Comentário */
+.comentario-item {
+    background-color: #f8fafc; /* Fundo ligeiramente diferente do post */
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid #cbd5e1; /* Detalhe na lateral esquerda */
+}
+
+.comentario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+}
+
+.comentario-data {
+    color: #94a3b8;
+}
+
+.comentario-texto {
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.comentario-vazio {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Formulário de Envio */
+.form-comentario {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-comentario {
+    padding: 0.6rem 1rem;
+    flex: 1;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #334155;
+    background-color: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-comentario:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* ==========================================================================
+   5. BOTÕES E COMPONENTES DE INTERAÇÃO
+   ========================================================================== */
+/* Botão Padrão (Enviar Comentário, etc) */
+.btn {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+/* Botões de Exclusão */
+.btn-excluir {
+    color: #ef4444;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.btn-excluir:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.btn-excluir-comentario {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+}
+
+.btn-excluir-comentario:hover {
+    color: #ef4444;
+    text-decoration: underline;
+}
+
+.comentario-login-aviso {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* Mensagem de Estado Vazio */
+.sem-posts {
+    text-align: center;
+    padding: 3rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    color: #64748b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Botão de exclusão de conta no menu */
+nav .btn-excluir-conta {
+    color: #fca5a5; /* Vermelho claro para combinar com o fundo escuro do header */
+}
+
+nav .btn-excluir-conta:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444; /* Vermelho vivo ao passar o mouse */
+}
+
+/* ==========================================================================
+   6. MENU DE NAVEGAÇÃO E DROPDOWN
+   ========================================================================== */
+nav {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Links normais do menu */
+.nav-link-principal {
+    color: #f1f5f9;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.nav-link-principal:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Estrutura do Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Botão principal do menu */
+.dropdown-btn {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown:hover .dropdown-btn {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Caixinha flutuante com as opções (escondida por padrão) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Alinha o menu à direita do botão */
+    background-color: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    z-index: 100;
+    margin-top: 0.25rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* Links dentro do menu suspenso */
+.dropdown-content a {
+    color: #334155;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+/* Efeito ao passar o mouse nas opções normais */
+.dropdown-content a:hover {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Linha divisória dentro do menu */
+.dropdown-divisor {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 0.4rem 0;
+}
+
+/* Mostra o menu quando o usuário passa o mouse por cima */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo do botão de excluir conta dentro do menu */
+.dropdown-content .btn-excluir-conta {
+    color: #ef4444;
+}
+
+.dropdown-content .btn-excluir-conta:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Novo Post - Blog{% endblock %}
+
+{% block conteudo %}
+<div class="post">
+    <h2>Escrever Nova Publicação</h2>
+    <form method="POST" style="margin-top: 1rem;">
+        {% csrf_token %}
+        <p>
+            <label for="titulo">Título do Post:</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </p>
+        <p>
+            <label for="conteudo">Conteúdo:</label>
+            <textarea id="conteudo" name="conteudo" rows="6" required></textarea>
+        </p>
+        <button type="submit" class="btn">Publicar Post</button>
+    </form>
+</div>
+{% endblock %}

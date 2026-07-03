@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Meu Blog Tech{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Meu Blog Tech</a></h1>
+        <p>Compartilhando ideias, códigos e novos projetos</p>
+        
+        <nav>
+            <a href="{% url 'index' %}" class="nav-link-principal">Início</a>
+        
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        Minha Conta ({{ user.username }}) ▾
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'criar_post' %}">📝 Nova Publicação</a>
+                        <a href="{% url 'logout' %}">🚪 Sair</a>
+                        <hr class="dropdown-divisor">
+                        <a href="{% url 'deletar_conta' %}" class="btn-excluir-conta" onclick="return confirm('ATENÇÃO: Tem certeza que deseja excluir sua conta? Todos os seus posts e comentários serão apagados permanentemente.');">
+                            ❌ Excluir Conta
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-link-principal">Entrar</a>
+                <a href="{% url 'cadastro' %}" class="nav-link-principal">Cadastrar</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
