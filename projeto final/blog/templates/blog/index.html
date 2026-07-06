@@ -1,76 +1,77 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Página Inicial - Meu Blog{% endblock %}
+{% block title %}Home - Meu Blog{% endblock %}
 
-{% block conteudo %}
-    {% if posts %}
-        {% for post in posts %}
-            <article class="post artigo-blog">
+{% block content %}
+<div class="posts-container">
+
+    {% for post in posts %}
+        <article class="post blog-article">
+            
+            <div class="post-header-meta">
+                <div>
+                    Postado por: <strong>{{ post.autor.username }}</strong> as {{ post.data_criacao|date:"d/m/Y H:i" }}
+                </div>
                 
-                <div class="post-header-meta">
+                {% if user == post.autor %}
                     <div>
-                        Postado por: <strong>{{ post.autor.username }}</strong> em {{ post.data_criacao|date:"d/m/Y H:i" }}
+                        <a href="{% url 'deletar_post' post.id %}" class="btn-delete" onclick="return confirm('Tem certeza que quer deletar este post?');">
+                            ❌ Delete Post
+                        </a>
                     </div>
-                    
-                    {% if user == post.autor %}
-                        <div>
-                            <a href="{% url 'deletar_post' post.id %}" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este post?');">
-                                ❌ Excluir Post
-                            </a>
-                        </div>
-                    {% endif %}
-                </div>
+                {% endif %}
+            </div>
 
-                <h2>{{ post.titulo }}</h2>
-                <div class="post-conteudo">
-                    {{ post.conteudo }}
-                </div>
+            <h2>{{ post.titulo }}</h2>
+            <div class="post-content">
+                <p>{{ post.conteudo }}</p>
+            </div>
+            
+            <hr class="divider-line">
 
-                <hr class="linha-divisoria">
+            <div class="comments-section">
+                <h3>Comentarios</h3>
 
-                <div class="comentarios-secao">
-                    <h3>Comentários</h3>
-                    
-                    {% if post.comentarios.all %}
-                        {% for comentario in post.comentarios.all %}
-                            <div class="comentario-item">
-                                <div class="comentario-header">
-                                    <div>
-                                        <strong>{{ comentario.autor.username }}</strong> 
-                                        <small class="comentario-data"> em {{ comentario.data_criacao|date:"d/m H:i" }}</small>
-                                    </div>
-                                    
-                                    {% if user == comentario.autor %}
-                                        <a href="{% url 'deletar_comentario' comentario.id %}" class="btn-excluir-comentario" onclick="return confirm('Excluir este comentário?');">
-                                            Apagar
-                                        </a>
-                                    {% endif %}
-                                </div>
-                                <p class="comentario-texto">{{ comentario.texto }}</p>
+                {% if post.comentarios.all %}
+                    {% for comentario in post.comentarios.all %}
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <strong>{{ comentario.autor.username }}</strong>
+                                <small class="comment-date">as {{ comentario.data_criacao|date:"d/m/Y H:i" }}</small>
                             </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="comentario-vazio">Nenhum comentário ainda. Seja o primeiro!</p>
-                    {% endif %}
+                            
+                            {% if user == comentario.autor %}
+                                <a href="{% url 'deletar_comentario' comentario.id %}" class="btn-delete-comment" onclick="return confirm('Deletar este comentario?');">
+                                    Delete
+                                </a>
+                            {% endif %}
+                            
+                            <p class="comment-text">{{ comentario.texto }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="comment-empty">Sem comentarios ainda!</p>
+                {% endif %}
 
-                    {% if user.is_authenticated %}
-                        <form method="POST" action="{% url 'postar_comentario' post.id %}" class="form-comentario">
-                            {% csrf_token %}
-                            <input type="text" name="comentario" placeholder="Escreva um comentário..." required class="input-comentario">
-                            <button type="submit" class="btn btn-comentario">Enviar</button>
-                        </form>
-                    {% else %}
-                        <p class="comentario-login-aviso">
-                            <small><a href="{% url 'login' %}">Faça login</a> para deixar um comentário.</small>
-                        </p>
-                    {% endif %}
-                </div>
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'postar_comentario' post.id %}" class="comment-form">
+                        {% csrf_token %}
+                        <input type="text" name="comentario" placeholder="Escreva um comentario..." required class="comment-input">
+                        <button type="submit" class="btn btn-comment">enviar</button>
+                    </form>
+                {% else %}
+                    <p class="comment-login-warning">
+                        <small><a href="{% url 'login' %}">Log in</a> Deixe um comentario.</small>
+                    </p>
+                {% endif %}
+            </div>
 
-            </article>
-        {% endfor %}
-    {% else %}
-        <div class="sem-posts">
-            <p>Nenhuma publicação encontrada por aqui ainda.</p>
-        </div>
-    {% endif %}
+        </article>
+    
+    {% empty %}
+        <p>Sem posts por enquanto.</p>
+        
+    {% endfor %}
+
+</div>
 {% endblock %}

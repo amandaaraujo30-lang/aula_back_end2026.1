@@ -4,31 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}Meu Blog Tech{% endblock %}</title>
-    {% load static %}
+    <title>{% block title %}Meu Blog{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
     <header>
-        <h1><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Meu Blog Tech</a></h1>
-        <p>Compartilhando ideias, códigos e novos projetos</p>
+        <h1><a href="{% url 'index' %}">Meu Blog</a></h1>
+        <p>Compartilhando  o dia, ideias e a vida</p>
         
+        <form method="GET" action="{% url 'index' %}">
+            <input type="text" name="q" placeholder="Buscar por título ou descrição..." value="{{ request.GET.q }}">
+            <button type="submit">Buscar</button>
+        </form>
+
         <nav>
             <a href="{% url 'index' %}" class="nav-link-principal">Início</a>
-        
+            
             {% if user.is_authenticated %}
                 <div class="dropdown">
                     <button class="dropdown-btn">
-                        Minha Conta ({{ user.username }}) ▾
+                        Minha Conta ({{ user.username }})
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'criar_post' %}">📝 Nova Publicação</a>
-                        <a href="{% url 'logout' %}">🚪 Sair</a>
+                        <a href="{% url 'criar_post' %}">Nova Publicação</a>
+                        <a href="{% url 'logout' %}">Sair</a>
                         <hr class="dropdown-divisor">
-                        <a href="{% url 'deletar_conta' %}" class="btn-excluir-conta" onclick="return confirm('ATENÇÃO: Tem certeza que deseja excluir sua conta? Todos os seus posts e comentários serão apagados permanentemente.');">
-                            ❌ Excluir Conta
-                        </a>
+                        <a href="{% url 'deletar_conta' %}" class="btn-excluir-conta" onclick="return confirm('ATENÇÃO: Tem certeza que deseja excluir sua conta? Todos os seus posts e comentários serão apagados permanentemente.');">❌ Excluir Conta</a>
                     </div>
                 </div>
             {% else %}
@@ -39,7 +41,7 @@
     </header>
 
     <main class="container">
-        {% block conteudo %}
+        {% block content %}
         {% endblock %}
     </main>
 

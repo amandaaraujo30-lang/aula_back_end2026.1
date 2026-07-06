@@ -1,10 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from .models import Post, Comentario
+from django.db.models import Q
 
 # Página Inicial
 def index(request):
+    # 1. Pega todas as postagens ordenadas por data
     posts = Post.objects.all().order_by('-data_criacao')
+    
+    # 2. Captura o termo digitado na barra de busca (q)
+    busca = request.GET.get('q')
+    
+    if busca:
+        # Filtra os posts pelo título ou pelo conteúdo usando a variável certa (posts)
+        posts = posts.filter(
+            Q(titulo__icontains=busca) | Q(conteudo__icontains=busca)
+        )
+        
+    # 3. Renderiza a página principal com a lista (filtrada ou não)
     return render(request, 'blog/index.html', {'posts': posts})
 
 # Cadastro
